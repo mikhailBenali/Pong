@@ -1,5 +1,7 @@
 import pygame
 
+# Pong
+
 pygame.init()
 screen_height = 800
 screen_width = 600
