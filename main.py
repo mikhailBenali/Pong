@@ -113,10 +113,25 @@ while running:
 
     # Ball boundaries
 
-    if 570 <= ball_y <= 0:  # Vertical bounce
-        ball_y_change = -ball_y_change
-    if (first_paddle_x <= ball_x < first_paddle_x + 10 and first_paddle_y < ball_y < first_paddle_y + 140) or (second_paddle_x + 10 < ball_x < second_paddle_x and second_paddle_y < ball_y < second_paddle_y + 140):  # Horizontal bounce
-        ball_x_change = -ball_x_change
+    if ball_y <= 0:  # Vertical bounce
+        ball_y_change = 0.3
+    elif ball_y >= 570:
+        ball_y_change = -0.3
+    if first_paddle_x <= ball_x + 15 < first_paddle_x + 10 and first_paddle_y < ball_y + 15 < first_paddle_y + 140:  # Horizontal bounce (first paddle)
+        ball_x_change = 0.3
+    elif second_paddle_x < ball_x + 15 < second_paddle_x + 10 and second_paddle_y < ball_y + 15 < second_paddle_y + 140:  # Horizontal bounce (second paddle)
+        ball_x_change = -0.3
+
+    if ball_x <= 0:  # If left wall is hit
+        ball_x_change = 0.3
+        ball_x = 370
+        ball_y = choice([x for x in range(0, 570)])  # Random y
+        score_first += 1
+    elif ball_x >= 770:  # If right wall is hit
+        ball_x_change = -0.3
+        ball_x = 370
+        ball_y = choice([x for x in range(0, 570)])  # Random y
+        score_second += 1
 
     # Blit
 
